@@ -35,7 +35,7 @@ def handle_message(event):
 		reply='Hello'
 	else:
 		reply='聽不懂'
-	message=TextSendMessage(text=replay)
+	message=TextSendMessage(text=reply)
 	line_bot_api.reply_message(event.reply_token,message)
 
 
@@ -47,31 +47,3 @@ if __name__ == "__main__":
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
