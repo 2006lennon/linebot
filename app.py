@@ -5,7 +5,7 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
 from engine.coin import now_currency
-from engine.own import OWM_lat_lon
+from engine.owm import OWM_lat_lon
 
 
 app = Flask(__name__)
