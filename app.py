@@ -5,6 +5,8 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
 from engine.coin import now_currency
+from engine.own import OWM_lat_lon
+
 
 app = Flask(__name__)
 # 設定你的Channel Access Token
@@ -42,12 +44,20 @@ def handle_message(event):
 	message=TextSendMessage(text=reply)
 	line_bot_api.reply_message(event.reply_token,message)
 
+@handler.add(MessageEvent,message=LocationMessage)
+def weather_message(event):
+	latitube=event.message.latitude
+	longitube=event.message.longitude
+	reply=OWM_lat_lon(latitube,longitube)
+	message=TextSendMessage(text=reply)
+	line_bot_api.reply_message(event.reply_token,message)
 
 
 import os
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))
 	app.run(host='0.0.0.0', port=port)
+
 
 
 
