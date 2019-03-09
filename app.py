@@ -5,7 +5,6 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
 app = Flask(__name__)
-
 # 設定你的Channel Access Token
 line_bot_api = LineBotApi('Y32t68/EPL3Km0kZ2tVl4VK0HNtsPs+rJLE/N3+GnqGo48rZTp542Ku9c8jTSUjN6ZRtbUTCfU7fdtDWc1qk5QuYa3RN1bDtBECNFnlb9VqaHKWxFThwxLeBkXnGcS1z/cJLiYZuTcT9FMpl4p7UcQdB04t89/1O/w1cDnyilFU=')
 # 設定你的Channel Secret
@@ -25,16 +24,54 @@ def callback():
 	except InvalidSignatureError:
 		abort(400)
 	return 'OK'
-
+	
 #處理訊息
 #當訊息種類為TextMessage時，從event中取出訊息內容，藉由TextSendMessage()包裝成符合格式的物件，並貼上message的標籤方便之後取用。
 #接著透過LineBotApi物件中reply_message()方法，回傳相同的訊息內容
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	message = TextSendMessage(text='hello')
-	line_bot_api.reply_message(event.reply_token, message)
+	word=event.message.text
+	if word=='你好':
+		reply='Hello'
+	else:
+		reply='聽不懂'
+	message=TextSendMessage(text=replay)
+	line_bot_api.reply_message(event.reply_token,message)
+
+
 
 import os
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))
 	app.run(host='0.0.0.0', port=port)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
